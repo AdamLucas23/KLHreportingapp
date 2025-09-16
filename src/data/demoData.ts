@@ -1,3 +1,4 @@
+
 export interface User {
   userPrincipalName?: string;
   assignedLicenses?: number[];
@@ -68,6 +69,7 @@ export interface ClientData {
   s1?: S1Data;
 }
 
+// IMPORTANT: The sidebar uses Object.keys(DEMO_CLIENTS) to show client names.
 export const DEMO_CLIENTS: Record<string, ClientData> = {
   "Contoso Ltd.": {
     m365: {
@@ -145,7 +147,10 @@ export const DEMO_CLIENTS: Record<string, ClientData> = {
           os_version: "Windows Server 2019",
           agent_version: "23.4.1",
           serial_number: `SRV${String(i + 1).padStart(3, "0")}`,
-          mac_address: `00:11:22:AA:${(i + 1).toString(16).padStart(2, "0").toUpperCase()}:01`,
+          mac_address: `00:11:22:AA:${(i + 1)
+            .toString(16)
+            .padStart(2, "0")
+            .toUpperCase()}:01`,
         })),
         ...Array.from({ length: 39 }, (_, i) => ({
           account_name: "Contoso Parent",
@@ -155,7 +160,10 @@ export const DEMO_CLIENTS: Record<string, ClientData> = {
           os_version: "Windows 11 23H2",
           agent_version: "23.4.1",
           serial_number: `LT${String(i + 1).padStart(3, "0")}`,
-          mac_address: `00:11:22:BB:${(i + 1).toString(16).padStart(2, "0").toUpperCase()}:02`,
+          mac_address: `00:11:22:BB:${(i + 1)
+            .toString(16)
+            .padStart(2, "0")
+            .toUpperCase()}:02`,
         })),
         ...Array.from({ length: 10 }, (_, i) => ({
           account_name: "Contoso Parent",
@@ -165,11 +173,15 @@ export const DEMO_CLIENTS: Record<string, ClientData> = {
           os_version: "Windows 10 22H2",
           agent_version: "22.9.5",
           serial_number: `DT${String(i + 1).padStart(3, "0")}`,
-          mac_address: `00:11:22:CC:${(i + 1).toString(16).padStart(2, "0").toUpperCase()}:03`,
+          mac_address: `00:11:22:CC:${(i + 1)
+            .toString(16)
+            .padStart(2, "0")
+            .toUpperCase()}:03`,
         })),
       ],
     },
   },
+
   "Fabrikam Inc.": {
     m365: {
       licensed: Array.from({ length: 19 }, (_, i) => ({
@@ -220,11 +232,18 @@ export const DEMO_CLIENTS: Record<string, ClientData> = {
       agents: [],
     },
   },
+
+  "Academic Therapy Publications": {
+  },
 };
 
+// Scenarios (unchanged)
 export type ScenarioType = "Default" | "Light Tenant" | "Security-Heavy" | "Empty";
 
-export const applyScenario = (data: ClientData, scenario: ScenarioType): ClientData => {
+export const applyScenario = (
+  data: ClientData,
+  scenario: ScenarioType
+): ClientData => {
   const result = JSON.parse(JSON.stringify(data)) as ClientData;
 
   switch (scenario) {

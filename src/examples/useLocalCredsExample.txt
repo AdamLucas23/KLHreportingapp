@@ -1,0 +1,3 @@
+// Example (not imported by the app):
+// import { loadCompanySecrets } from "../lib/credentials";
+// loadCompanySecrets().then(list => console.log("Companies available:", list));
